@@ -405,15 +405,15 @@ const distanceText = document.getElementById("distanceValue");
 	
    // Polling loop
 setInterval(async () => {
-  try {
-    const response = await fetch("http://localhost:5000/api/distance");
-    const json = await response.json();
+ 
+    // const response = await fetch("http://localhost:5000/api/distance");
+    // const json = await response.json();
 
-    if (!json || json.distance_cm === undefined) {
-      throw new Error("Invalid API response: " + JSON.stringify(json));
-    }
+    // if (!json || json.distance_cm === undefined) {
+    //   throw new Error("Invalid API response: " + JSON.stringify(json));
+    // }
 
-    const distance = parseFloat(json.distance_cm);
+    const distance = (Math.random() * (400 - 2) + 2).toFixed(2); 
     const now = new Date().toLocaleTimeString();
 
     // Update Line Chart
@@ -430,11 +430,10 @@ setInterval(async () => {
     // gaugeChart.update();
 
     // Update text label
-    distanceText.textContent = `Distance: ${distance.toFixed(1)} cm`;
+	console.log("Updating distance text with value:", distance);
+    distanceText.textContent = `Distance: ${distance} cm`;
 
-  } catch (error) {
-    console.error("Failed to fetch data:", error);
-  }
+  
 }, 1000);
 
 // ⏱️ Poll every second for new distance data
